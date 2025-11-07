@@ -1,0 +1,1 @@
+# RPP RA - Full Next.js App\nRun: npm install && npm run dev
