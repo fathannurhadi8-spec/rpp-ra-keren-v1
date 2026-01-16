@@ -93,13 +93,20 @@ export default function AppRPPRA() {
   };
 
   const handleSubtopikChange = (e) => {
-    const val = e.target.value;
-    setSubtopik(val);
-    if (!val) return;
-    const tpResult = generateTP(val, temaKBC, profilLulusan);
-    setTujuan(tpResult.text);
-    setIndikator(generateIndicators(tpResult));
+  const val = e.target.value;
+  setSubtopik(val);
+  if (!val) return;
+
+  const subtopicData = {
+    title: val,
+    topicId: topik,
+    kegiatanInti: topicsData[topik]?.subtopics?.[val]?.kegiatanInti || []
   };
+
+  const tpResult = generateTP(subtopicData, temaKBC, profilLulusan);
+  setTujuan(tpResult.text);
+  setIndikator(generateIndicators(tpResult));
+};
 
   const handleTemaKBCChange = (e) => {
     const tema = e.target.value;
