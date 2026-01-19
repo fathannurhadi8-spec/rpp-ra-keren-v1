@@ -86,7 +86,8 @@ export default function AppRPPRA() {
     const val = e.target.value;
     setTopik(val);
     setSubtopik("");
-    setTujuan(topicsData[val]?.tujuanPembelajaran || "");
+    setTujuan("");
+    setIndikator([]);
     setProfilLulusan(topicsData[val]?.profilLulusan || "");
     setTemaKBC(topicsData[val]?.temaKBC || "");
     setMateriInsersiFinal("");
