@@ -99,13 +99,19 @@ export default function AppRPPRA() {
   setSubtopik(val);
   if (!val) return;
 
+  // 🔥 AMBIL LANGSUNG DARI topicsData (BUKAN state)
+  const tema = topicsData[topik]?.temaKBC || temaKBC;
+  const profil = topicsData[topik]?.profilLulusan || profilLulusan;
+
   const subtopicData = {
     title: val,
     topicId: topik,
-    kegiatanInti: topicsData[topik]?.subtopics?.[val]?.kegiatanInti || []
+    kegiatanInti:
+      topicsData[topik]?.subtopics?.[val]?.kegiatanInti || []
   };
 
-  const tpResult = generateTP(subtopicData, temaKBC, profilLulusan);
+  const tpResult = generateTP(subtopicData, tema, profil);
+
   setTujuan(tpResult.text);
   setIndikator(generateIndicators(tpResult));
 };
