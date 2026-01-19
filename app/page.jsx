@@ -81,6 +81,22 @@ export default function AppRPPRA() {
     "Kesehatan",
   ];
 
+  useEffect(() => {
+    if (!topik || !subtopik) return;
+
+    const subtopicData = {
+      title: subtopik,
+      topicId: topik,
+      kegiatanInti:
+        topicsData[topik]?.subtopics?.[subtopik]?.kegiatanInti || []
+    };
+
+    const tpResult = generateTP(subtopicData, temaKBC, profilLulusan);
+    setTujuan(tpResult.text);
+    setIndikator(generateIndicators(tpResult));
+  }, [topik, subtopik, temaKBC, profilLulusan]);
+
+  
   // ===== HANDLERS =====
   const handleTopikChange = (e) => {
     const val = e.target.value;
