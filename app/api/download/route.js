@@ -26,6 +26,12 @@ const pb = (text) =>
     spacing: { after: 120 },
   });
 
+const safeText = (t = "") =>
+  String(t)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
 // Fungsi untuk bikin nama file aman
 const safe = (s) => (s || "").replace(/[^a-z0-9-_]+/gi, "_").slice(0, 60);
 
@@ -34,7 +40,9 @@ export async function POST(req) {
     const body = await req.json();
     const rpp = generateRPP(body); // ✅ data lengkap dari generator.js (langsung dari topics.js)
 
-    const indikator   = rpp.indikatorTujuanPembelajaran || [];
+    const indikator = Array.isArray(rpp.indikatorTujuanPembelajaran)
+      ? rpp.indikatorTujuanPembelajaran
+      : [];
     const inti        = rpp.kegiatanPembelajaran.inti || [];
     const pendahuluan = rpp.kegiatanPembelajaran.pendahuluan || [];
     const penutup     = rpp.kegiatanPembelajaran.penutup || [];
@@ -164,13 +172,16 @@ export async function POST(req) {
             p(`Profil Lulusan: ${rpp.identitas.profilLulusan}`),
             p(`Materi Insersi KBC: ${rpp.identitas.materiInsersi}`),
 
-            pb("A. Tujuan Pembelajaran"),
-            p(rpp.tujuanPembelajaran),
+            pb("A. Capaian Pembelajaran"),
+            p(rpp.capaianPembelajaran),
 
-            pb("B. Indikator Tujuan Pembelajaran"),
-            ...indikator.map(i => p(i)),
+            pb("B. Tujuan Pembelajaran"),
+            p("Isi disesuaikan dengan pemetaan CP."),
 
-            pb("C. Kegiatan Pembelajaran"),
+            pb("C. Indikator Tujuan Pembelajaran"),
+            p("Isi disesuaikan dengan kelompok."),
+
+            pb("D. Kegiatan Pembelajaran"),
 
             pb("1. Pendahuluan"),
             ...pendahuluan.map(i => p(`- ${i}`)),
@@ -181,7 +192,7 @@ export async function POST(req) {
             pb("3. Penutup"),
             ...penutup.map(i => p(`- ${i}`)),
 
-            pb("D. Asesmen Formatif"),
+            pb("E. Asesmen Formatif"),
             new Table({
               width: { size: 100, type: WidthType.PERCENTAGE },
               rows: [
