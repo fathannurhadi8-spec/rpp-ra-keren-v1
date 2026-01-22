@@ -124,7 +124,7 @@ export async function POST(req) {
       width: { size: 100, type: WidthType.PERCENTAGE },
       rows: [
         new TableRow({
-          children: ["Indikator", "BSB", "BSH", "MB", "BB"].map((h) =>
+          children: ["Indikator", "SB", "B", "C", "K"].map((h) =>
             new TableCell({ children: [pb(h)] })
           ),
         }),
