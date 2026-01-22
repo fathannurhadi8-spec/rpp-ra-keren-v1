@@ -116,6 +116,7 @@ export default function AppRPPRA() {
   setIndikator(generateIndicators(tpResult));
 };
 
+
   const handleTemaKBCChange = (e) => {
     const tema = e.target.value;
     setTemaKBC(tema);
@@ -169,13 +170,16 @@ export default function AppRPPRA() {
           <h3>Identitas</h3>
           ${Object.entries(rpp.identitas).map(([k, v]) => `<p><b>${k}:</b> ${v}</p>`).join("")}
 
-          <h3>A. Tujuan Pembelajaran</h3>
-          <p>${rpp.tujuanPembelajaran}</p>
+          <h3>A. Capaian Pembelajaran</h3>
+          <p>${rpp.capaianPembelajaran}</p>
 
-          <h3>B. Indikator</h3>
-          <ul>${rpp.indikatorTujuanPembelajaran.map((i) => `<li>${i}</li>`).join("")}</ul>
+          <h3>B. Tujuan Pembelajaran Learning Goal</h3>
+          <p>Isi disesuaikan dengan pemetaan CP.</p>
 
-          <h3>C. Kegiatan Pembelajaran</h3>
+          <h3>C. Indikator Ketercapaian Tujuan Pembelajaran</h3>
+          <p>Isi disesuaikan dengan kelompok.</p>
+
+          <h3>D. Kegiatan Pembelajaran</h3>
 
           <h4>1. Pendahuluan</h4>
           <ul>${rpp.kegiatanPembelajaran.pendahuluan.map((t) => `<li>${t}</li>`).join("")}</ul>
@@ -242,7 +246,7 @@ export default function AppRPPRA() {
         </div>
       </header>
 
-      <div className="info-banner">Aplikasi ini dibuat oleh Pengawas Keren Youtube Channel</div>
+      <div className="info-banner">Aplikasi ini dibuat oleh Pengawas Keren Youtube Channel WA 087866174274</div>
 
       {/* LOGIN */}
       <div className="login-box">
