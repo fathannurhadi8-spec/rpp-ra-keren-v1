@@ -5,7 +5,6 @@ export async function POST(req) {
   try {
     const body = await req.json();
 
-    // ✅ Validasi input sederhana
     if (!body?.topik || !body?.subtopik) {
       return NextResponse.json(
         { error: "Topik & Subtopik wajib dipilih" },
@@ -13,17 +12,21 @@ export async function POST(req) {
       );
     }
 
-    // ✅ Generate RPP final (form override topics)
     const rpp = generateRPP(body);
 
-    // ✅ Pastikan struktur aman
     const safeRPP = {
       ...rpp,
+
+      // A. Capaian Pembelajaran = TUJUAN LAMA DARI FORM
+      capaianPembelajaran: body.tujuan || "-",
+
+      // B. Tujuan Pembelajaran (BARU)
+      tujuanPembelajaran: "Isi disesuaikan dengan pemetaan CP.",
+
+      // C. Indikator Tujuan Pembelajaran
+      indikatorTujuanPembelajaran: "Isi disesuaikan dengan kelompok.",
+
       identitas: rpp.identitas ?? {},
-      tujuanPembelajaran: rpp.tujuanPembelajaran ?? "-",
-      indikatorTujuanPembelajaran: Array.isArray(rpp.indikatorTujuanPembelajaran)
-        ? rpp.indikatorTujuanPembelajaran
-        : [],
       kegiatanPembelajaran: rpp.kegiatanPembelajaran ?? {},
       asesmen: rpp.asesmen ?? {},
     };
