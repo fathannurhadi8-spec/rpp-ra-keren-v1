@@ -197,7 +197,7 @@ export async function POST(req) {
               width: { size: 100, type: WidthType.PERCENTAGE },
               rows: [
                 new TableRow({
-                  children: ["No","Indikator","BSB","BSH","MB","BB","Catatan Guru"].map(h => new TableCell({ children: [pb(h)] })),
+                  children: ["No","Indikator","SB","B","C","K","Catatan Guru"].map(h => new TableCell({ children: [pb(h)] })),
                 }),
                 ...rpp.asesmen.formatif.map((k, i) =>
                   new TableRow({
@@ -255,7 +255,7 @@ export async function POST(req) {
             width: { size: 100, type: WidthType.PERCENTAGE },
             rows: [
               new TableRow({
-                children: ["No","Aktivitas Bermain","BSB","BSH","MB","BB","Catatan Guru"].map(h => new TableCell({ children: [pb(h)] })),
+                children: ["No","Aktivitas Bermain","SB","B","C","K","Catatan Guru"].map(h => new TableCell({ children: [pb(h)] })),
               }),
               ...item.detail.kegiatanMain.map((main, i) =>
                 new TableRow({
